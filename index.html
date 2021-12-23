@@ -1,0 +1,96 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel = 'stylesheet' href = 'style.css'>
+  <lang en>
+</head>
+<body>
+  <div class='container'>
+    <button value = '1'>1</button>
+    <button value = '2'>2</button>
+    <button value = '3'>3</button>
+    <button value = '4'>4</button>
+    <button value = '5'>5</button>
+    <button value = '6'>6</button>
+    <button value = '7'>7</button>
+    <button value = '8'>8</button>
+    <button value = '9'>9</button>
+    <button value = '10'>10</button>
+  </div>
+  <div id='results'>
+    This is the area for text
+  </div>
+  <div id="text">
+    this is also an area for text
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    let computerRandom = 0;
+    //the computers selection
+    function computer(){
+      //random number 1-10
+      computerRandom = Math.floor(Math.random() * 10) + 1;
+      return computerRandom;
+    }
+    computerRandom = computer()
+
+
+    let i = 4;
+    let answer = '';
+    let text = '';
+    function playRound(selection){
+      console.log(computerRandom)
+        if(selection == computerRandom){//start of the if statement
+          answer = "Correct"
+          text = "Refresh the page to play again"
+          i = i-1
+          if(i == 0 && selection != computerRandom){
+            text = `You have lost refresh the page to try again<br>The correct answer was ${computerRandom}`
+          }
+        }else if(selection > computerRandom){
+          answer = `${selection} is too high`
+          i = i-1
+          if(i == 0){text = `You have lost refresh the page to try again<br>The correct answer was ${computerRandom}`}
+        }else if(selection < computerRandom){
+          answer = `${selection} is too low`
+          i = i-1
+          if(i == 0){text = `You have lost refresh the page to try again<br>The correct answer was ${computerRandom}`}
+        }//end of the if statement
+      //styling and entering the text into the page
+      document.querySelector('#results').style.textAlign = 'center';
+      document.querySelector('#results').style.fontSize = 'xx-large';
+      document.querySelector('#results').innerHTML = answer;
+
+      document.querySelector('#text').style.textAlign = 'center';
+      document.querySelector('#text').style.fontSize = 'x-large';
+      document.querySelector('#text').innerHTML = text;
+    }//end of the function
+
+
+
+
+    //loops through every button and adds an event addEventListener for a click then assigns that value of the button to the varibale of the playRound function
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(button =>
+      button.addEventListener('click' , function(){
+        playRound(button.value)
+      })
+    )
+
+
+
+    playRound()
+  </script>
+</body>
+</html>
